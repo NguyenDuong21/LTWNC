@@ -1,0 +1,349 @@
+/*
+Template: Superb Music
+Author: XpertPoin8, http://xpertpoin8.com/
+Version: 1.0
+*/
+
+/* Table of Content
+================================================== 
+
+    01. GENERAL STYLES
+    02. FLEX SLIDER OVERRIDES
+    03. MENU STYLES
+    04. MAP STYLES
+    05. TEAM STYLES
+    06. FOOTER STYLES
+    07. ORDER POPUP STYLES
+	08. CSS
+    09. Slide 1
+    10. Gallery
+    11. Services
+    12. RESPONSIVE DESIGN
+
+*/
+
+
+/* 01 - GENERAL STYLES
+-------------------------------------------------*/
+
+*::-moz-selection { background:#000; color:#fff; }
+html,body{font-family:'Open Sans',sans-serif;font-size:18px;color:#000;font-weight:300}
+@font-face{font-family:'Mono Social Icons Font';src:url('../fonts/MonoSocialIconsFont-1.10.html');src:url('../fonts/MonoSocialIconsFont-1.10d41d.html?#iefix') format('embedded-opentype'),url('../fonts/MonoSocialIconsFont-1.10-2.html') format('woff'),url('../fonts/MonoSocialIconsFont-1.10-3.html') format('truetype'),url('../fonts/MonoSocialIconsFont-1.10-4.html#MonoSocialIconsFont') format('svg');src:url('../fonts/MonoSocialIconsFont-1.10-3.html') format('truetype');font-weight:normal;font-style:normal}
+.symbol,a.symbol:before{font-family:'Mono Social Icons Font';-webkit-text-rendering:optimizeLegibility;-moz-text-rendering:optimizeLegibility;-ms-text-rendering:optimizeLegibility;-o-text-rendering:optimizeLegibility;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;-ms-font-smoothing:antialiased;-o-font-smoothing:antialiased;font-smoothing:antialiased}
+a.symbol{font-size:48px;line-height:48px;padding:0;margin:0;background:0;float:left;margin:0 15px 0 0;padding:0}
+a.symbol:hover{background:0;color:#febf14}
+a{color:#33211d;text-decoration:none;transition:color .1s ease-in-out;-moz-transition:color .1s ease-in-out;-webkit-transition:color .1s ease-in-out}
+a:hover{text-decoration:none;color:#da9f5b}
+p {margin: 0 0 30px 0; line-height: 1.7em; font-size:14px;}
+.ebold{font-weight:900}
+.topbar{font-size:14px;min-height:50px;padding:13px 0 0 0}
+.logo{float:left; padding:9px 0;}
+.logo a img { width: 100%; transition:width 0.3s ease 0s;}
+.sticky .logo a img { width: 60%;}
+.topbar .contact{float:right}
+.centered{text-align:center}
+.row h2{text-align:center;font-size:30px;margin:0 0 75px 0; text-transform:uppercase;}
+.row{margin-bottom:30px;padding:0 0 50px 0;}
+.nomgbtm{margin-bottom:0;padding-bottom:0;border:0}
+.fullspan{width:100%}
+.fullspan.black{height:50px;background:#000}
+.fullspan.slider{text-align:center;overflow:hidden}
+.fullspan.dark{background:#33211d;color:#fff;font-size:18px; padding:50px 0 0 0;}
+.fullspan.copy{background:#da9f5b;color:#fff;font-size:13px;padding:15px 0;text-align:center; text-transform:uppercase;}
+.navbar-inverse .navbar-nav>li>a{ transition:padding 0.3s ease 0s; font-size:14px;font-weight:600; border-bottom:3px solid #fff; outline:none; text-transform: uppercase; }
+.navbar-inverse .navbar-nav>li>a.active{color:#fff}
+.sticky .navbar-nav li a { padding-bottom: 23px; padding-top: 23px; }
+.border-b { background: none repeat scroll 0 0 #e5e5e5;
+    float: left;
+    height: 1px;
+    margin-top: 70px;
+    position: relative;
+    width: 100%; }
+.border-b span { background:url(../img/border.png) no-repeat 0 0 #fff; position:absolute; width:110px; height:27px; left:50%; top:-12px; margin-left:-50px; }
+.testimonials { margin: 0; padding: 0; }
+
+/* 02 - FLEX SLIDER OVERRIDES
+-------------------------------------------------*/
+
+.flexslider .row{padding:0;margin-bottom:0;border:0 none}
+.flexslider .inner{color:#000;margin:auto;position:absolute;top:0;left:0;bottom:0;right:0;text-align:center}
+.flexslider h1{font-size:90px;background-color:rgba(0,0,0,0.80);padding:5px 20px 15px 20px;font-weight:100;letter-spacing:3px;text-transform:uppercase; display:inline-block; margin:130px auto 30px; color:#fff;}
+.flexslider h2{font-size:24px;background-color:rgba(0,0,0,0.80);padding:5px 20px;font-weight:100;letter-spacing:9px;text-transform:uppercase;display:inline-block;clear:both;overflow:hidden; color:#fff;}
+.flexslider .container{margin:auto;position:absolute;top:0;left:0;bottom:0;right:0;text-align:center}
+.blocks-frat{display:block;margin:0 auto 25px; overflow:hidden; position:relative;}
+.subtitle {font-size: 22px;font-weight: bold; text-transform:uppercase; }
+
+
+/* 03 - MENU STYLES
+-------------------------------------------------*/
+
+.accordion{margin-bottom:30px;padding-bottom:0}
+.accordion .row{clear:both;overflow:hidden;margin-bottom:0}
+.ui-accordion-header span.menuhead{padding:0;line-height:18px;cursor:pointer; color:#fff; text-transform:uppercase;}
+.ui-accordion-header span.menuhead:focus{outline:0}
+.ui-accordion-header {line-height: 18px; padding: 40px; margin: 1px; position:relative; text-align:center; cursor:pointer;}
+.ui-accordion-header.ui-state-active{background: #f7f7f7 url("../img/menu-switch.html") no-repeat left bottom ;background-position: -5px -12px; }
+#ui-accordion-1-header-0 { background:url("../images/menu-1.jpg") no-repeat center center; background-size:100% auto; }
+#ui-accordion-1-header-1 { background:url("../images/menu-2.jpg") no-repeat center center; background-size:100% auto; }
+#ui-accordion-1-header-2 { background:url("../images/menu-3.jpg") no-repeat center center; background-size:100% auto; }
+#ui-accordion-1-header-3 { background:url("../images/menu-4.html") no-repeat center center; background-size:100% auto; }
+#ui-accordion-1-header-4 { background:url("../images/menu-5.html") no-repeat center center; background-size:100% auto; }
+.ui-accordion .row{margin-bottom:10px;padding:0;border:0}
+.ui-accordion-content{padding:40px 40px 1px 40px; background: #fffdf8}
+.item{zoom:1;position:relative;clip:auto;overflow:hidden}
+.thumb { border-radius: 50%;
+    float: left;
+    margin-right: 20px;
+    width: 93px; }
+.info{position:relative;text-align:right;white-space:nowrap;margin-bottom:5px; float:left;}
+.dots{position:absolute;left:0;right:0;border-bottom:1px dotted #aaa;height:77%}
+.name{background:#fffdf8;float:left;margin-right:20px;padding-right:4px;position:relative;font-weight:900; text-transform:uppercase;}
+.price{background:#33211d;padding:5px 10px;position:absolute; left:10px; top:10px; z-index:1; color:#fff; font-weight:bold; }
+.legend span{font-size:14px;font-weight:bold;color:#33211d;margin:0 10px 0 0}
+.legend{display:block;margin:10px 0 15px 0; float:left;}
+.description { float:left; }
+.legend .veg{background:#3ca318}
+.legend .spicy{background:#ff7e00}
+
+
+/* 04 - MAP STYLES
+-------------------------------------------------*/
+
+.deliveryvisit{list-style:none;margin:30px 0 0 0;padding:0}
+.deliveryvisit li{clear:both;overflow:hidden;margin:0 0 10px 0}
+.deliveryvisit li label{width:150px;font-size:16px;font-weight:normal}
+.map{border-bottom:0}
+.map iframe{margin-bottom:20px}
+
+
+/* 05 - TEAM STYLES
+-------------------------------------------------*/
+
+.portrait h4{font-size:24px;font-weight:bold;margin:60px 0 25px 0}
+.social{list-style:none;margin:0 0 110px 0;padding:0;display:block}
+.shares{margin:0 0 60px 0}
+.twitter-share-button{width:90px !important}
+#p2 { margin-top:170px; }
+i.fa { border-radius: 50%;
+transition:background-color 0.5s ease-in-out 0s;
+    height: 37px;
+    padding: 10px;
+    vertical-align: middle;
+    width: 37px;}
+.social-mid a .fa { color:#fff;  }
+.social-mid a:hover .fa { background:#33211d; }
+.social-mid a .fa:hover { color:#fff; }
+.social-mid a .fa-facebook      {background-color: #2f5a9a;}
+.social-mid a .fa-twitter    {background-color: #3abdd1;}
+.social-mid a .fa-google-plus   {background-color: #363636;}
+.social-mid a .fa-pinterest {background-color: #d13a3a;}
+.social-mid a .fa-linkedin      {background-color: #0072b2;}
+
+
+/* 06 - FOOTER STYLES
+-------------------------------------------------*/
+
+footer{padding:0 0 0 0}
+footer h4{font-size:18px;font-weight:bold;color:#da9f5b;margin:0 0 30px 0;padding:0;clear:both; text-transform:uppercase;}
+footer p{padding:0;margin:0;}
+footer .copy a {background: none; color: #fff; padding: 0; font-weight: bold; font-size: 13px; margin 0;}
+#p6 .col-md-4 { margin-bottom:40px; }
+.visit p { margin-bottom: 20px; } 
+a.pdf{background:#ab0b00 url("../img/pdf.html") no-repeat right;padding:3px 35px 3px 15px}
+a.pdf:hover{background:#febf14 url("../img/pdf.html") no-repeat right;padding:3px 35px 3px 15px}
+.testimonials h3{color:#fff;text-align:center;margin:0 auto;padding:60px 0;font-size:36px;font-weight:300;}
+#parallax .name { color:#fff; background:none; }
+#parallax .description { color:#fff; font-size:13px; }
+#parallax .legend { margin:0; }
+#parallax .name { margin-right:0; }
+.margin { margin-bottom:40px; }
+footer .row{border:0;margin:0;padding:0}
+footer .working strong{width:150px;display:inline-block; text-transform:uppercase;}
+.contact h4:first-child{margin:0 0 35px 0}
+.contact input[type=text]{width:100%;border:0;background:#fff;padding:10px 20px; font-size:14px; text-transform:uppercase;color:#000;margin:0 0 10px 0}
+.contact textarea{width:100%;border:0 none;padding:10px 20px; font-size:14px; text-transform:uppercase; color:#000;margin:0 0 9px 0}
+.contact input[type=submit]{transition:background .1s ease-in-out;-moz-transition:background .1s ease-in-out;-webkit-transition:background .1s ease-in-out;padding:10px 20px;background:#da9f5b;font-size:14px;font-weight:bold;color:#fff;margin:0;border:0}
+.contact input[type=submit]:hover{transition:background .1s ease-in-out;-moz-transition:background .1s ease-in-out;-webkit-transition:background .1s ease-in-out;background:#fff;color:#da9f5b}
+.contactform input.error,.contactform textarea.error,.newsletter input.error{background:#da9f5b;color:#fff}
+.contactform input[disabled],.contactform input[disabled]:hover,.contactform textarea[disabled],.newsletter input[disabled],.newsletter input[disabled]:hover{background:#08a100;color:#fff}
+input[disabled].submit { background:#da9f5b;  }
+
+
+/* 07 - ORDER POPUP STYLES
+-------------------------------------------------*/
+
+.headerRow{clear:both;overflow:hidden;margin:0 0 10px 0;padding:0 0 10px 0;border-bottom:1px solid #777;font-size:14px !important}
+.itemRow{clear:both;overflow:hidden;margin:0 0 10px 0;padding:0 0 10px 0;border-bottom:1px dotted #777;font-size:16px}
+.headerRow div,.itemRow div{float:left}
+.headerRow .item-name{display:inline-block;width:37%;font-weight:500;font-size:14px}
+.itemRow .item-name{display:inline-block;width:37%;font-weight:700;font-size:16px}
+.headerRow .item-price,.itemRow .item-price{display:inline-block;width:10%;text-align:center}
+.headerRow .item-decrement,.itemRow .item-decrement{display:inline-block;width:7%;text-align:center}
+.headerRow .item-quantity,.itemRow .item-quantity{display:inline-block;width:5%;text-align:center}
+.headerRow .item-increment,.itemRow .item-increment{display:inline-block;width:9%;text-align:center}
+.headerRow .item-total,.itemRow .item-total{display:inline-block;width:18%}
+.headerRow .item-remove,.itemRow .item-remove{display:inline-block;width:14%}
+
+
+/* 08 - CSS
+-------------------------------------------------*/
+
+.hsContainer {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    opacity: 0;
+}
+.hsContent {
+    max-width: 450px;
+    margin: -150px auto 0 auto;
+    display: table-cell;
+    vertical-align: middle;
+    color: #ebebeb;
+    padding: 0 8%;
+    text-align: center
+}
+.bg {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+	padding-bottom:30px;
+}
+
+
+/* 09 - Slide 1
+-------------------------------------------------*/
+
+#parallax .bg {background-image:url('../images/parallax.jpg')}
+
+
+/* 10 - Gallery
+-------------------------------------------------*/
+
+.slide a { overflow:hidden; display:block; }
+
+
+/* 10 - Services
+-------------------------------------------------*/
+
+.hi-icon {
+    display: inline-block;
+    font-size: 0px;
+    cursor: pointer;
+    margin: 15px 30px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+
+.hi-icon:after {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    content: '';
+    -webkit-box-sizing: content-box; 
+    -moz-box-sizing: content-box; 
+    box-sizing: content-box;
+}
+
+.hi-icon-effect-1 .hi-icon {
+    background: #33211d;
+    -webkit-transition: background 0.2s, color 0.2s;
+    -moz-transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s;
+}
+
+.hi-icon-effect-1 .hi-icon:after {
+    top: -7px;
+    left: -7px;
+    padding: 7px;
+    box-shadow: 0 0 0 4px #da9f5b;
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+    -webkit-transform: scale(.8);
+    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(.8);
+    opacity: 0;
+}
+
+.hi-icon-effect-1a .hi-icon:hover {
+    background: #da9f5b;
+    color: #fff;
+}
+
+.hi-icon-effect-1a .hi-icon:hover:after {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+.hi-icon-wrap a i { font-size: 60px !important; color: #fff; line-height: 147px; width: 100%; text-align: center; }
+
+
+
+/* 11 - RESPONSIVE DESIGN
+-------------------------------------------------*/
+@media(min-width:240px) and (max-width:640px){ .row .head { margin:120px 0 75px; }
+.social-mid { margin-bottom:40px; }
+.blocks-frat .img-responsive { width:100%; }
+.logo a img { width: 60%;}
+}
+@media(min-width:240px) and (max-width:767px){ 
+.logo a img { width: 60%;}
+.sticky .navbar-nav>li>a {
+padding-top:10px !important;
+padding-bottom:10px !important;
+}
+}
+@media(max-width:320px){.kontakt{width:100%;background:0;height:auto;border:0}
+.logo,.topbar .contact{padding:15px;float:left}
+.invmob{display:none}
+.flexslider{display:none}
+.flexslider .inner{color:#000}
+.flexslider h1{font-size:18px;margin:20px auto 10px}
+.flexslider h2{font-size:14px}
+}
+@media(min-width:320px) and (max-width:640px){.kontakt{width:100%;background:0;height:auto;border:0}
+.logo,.topbar .contact{padding:15px;float:left}
+.invmob{display:none}
+.flexslider{display:none}
+.flexslider .inner{color:#000}
+.flexslider h1{font-size:30px;margin:10px auto 10px;padding:5px 10px}
+.flexslider h2{font-size:14px}
+.logo a img { width: 60%;}
+}
+@media(min-width:640px) and (max-width:960px){.kontakt{width:100%;background:0;height:auto;border:0}
+.logo,.topbar .contact{padding:15px;float:left}
+.invmob{display:none}
+.flexslider .inner{color:#000}
+.flexslider h1{font-size:60px;margin:40px auto 10px}
+.flexslider h2{font-size:14px}
+}
+@media(min-width:960px) and (max-width:1170px){.kontakt{width:100%;background:0;height:auto;border:0}
+.invmob{display:none}
+.flexslider .inner{color:#000}
+.flexslider h1{font-size:60px;margin:80px auto 10px}
+.flexslider h2{font-size:14px}
+}
+@media(min-width:1170px) and (max-width:1400px){.kontakt{width:100%;background:0;height:auto;border:0}
+.invmob{display:none}
+.flexslider .inner{color:#000}
+.flexslider h1{font-size:90px;margin:210px auto 20px;}
+.flexslider h2{font-size:24px}
+}
