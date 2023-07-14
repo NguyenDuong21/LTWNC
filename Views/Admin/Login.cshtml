@@ -23,17 +23,22 @@
                      <div class="col-lg-6">
                         <div class="modal-content cs_modal">
                            <div class="modal-header">
-                              <h5 class="modal-title">Log in</h5>
+                              <h5 class="modal-title">Đăng nhập</h5>
                            </div>
                            <div class="modal-body">
-                              <form>
+                              <form method="post" action="">
                                  <div class>
-                                    <input type="text" class="form-control" placeholder="Enter your email">
+                                    <input type="text" class="form-control" name="Email" placeholder="Nhập tài khoản">
+                                    <small class="text-danger"></small>
                                  </div>
                                  <div class>
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" name="Password" placeholder="Mật khẩu">
+                                    <small class="text-danger"></small>
                                  </div>
-                                 <a href="#" class="btn_1 full_width text-center">Log in</a>
+                                 <div class>
+                                    <p>@(ViewData["isLoginSuccess"] != null ? ViewData["isLoginSuccess"] : "")</p>
+                                 </div>
+                                 <button class="btn_1 full_width text-center">Đăng nhập</button>
                                  <p>Need an account? <a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="#"> Sign Up</a></p>
                                  <div class="text-center">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#forgot_password" data-bs-dismiss="modal" class="pass_forget_btn">Forget Password?</a>
@@ -47,5 +52,6 @@
             </div>
          </div>
       </div>
+      <script src="~/js/site.js" asp-append-version="true"></script>
    </body>
 </html>
