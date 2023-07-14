@@ -7,39 +7,43 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 namespace Cafe_Management_System.Controllers;
 
 public class AdminController : Controller
 {
     private readonly ILogger<AdminController> _logger;
     private readonly dbContext _context;
+    private string email;
     public AdminController(ILogger<AdminController> logger, dbContext context)
     {
         _logger = logger;
         _context = context;
+        
     }
 
     public IActionResult Index()
     {
-        return View();
+        email = HttpContext.Session.GetString("_Email");
+        return email != null ? View() : RedirectToAction("Login");
     }
 
     [HttpGet("/login")]
     public async Task<IActionResult> Login()
     {
-        var account = await _context.tblAccount.ToListAsync();
-        Console.WriteLine(Encrypt("123456"));
-        return View();
+        email = HttpContext.Session.GetString("_Email");
+        return email == null ? View() : RedirectToAction("Index");
     }
     [HttpPost("/login")]
     public async Task<IActionResult> LoginHandle(Account account)
     {
-        string email = account.Email;
+        string emailLogin = account.Email;
         ViewData["isLoginSuccess"] = "Tài khoản hoặc mật khẩu không chính xác";
-        Account loginAccount = await _context.tblAccount.FindAsync(email);
+        Account loginAccount = await _context.tblAccount.FindAsync(emailLogin);
         if(loginAccount != null) {
             string password = loginAccount.PassWord;
             if (password == Encrypt(account.PassWord)) {
+                HttpContext.Session.SetString("_Email", emailLogin);
                 return RedirectToRoute("AdminPage");
             }
         }
