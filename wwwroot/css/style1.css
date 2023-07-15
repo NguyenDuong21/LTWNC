@@ -1984,7 +1984,7 @@ table.dataTable.dtr-inline.collapsed
   position: fixed;
   top: 0;
   z-index: 99;
-  padding: 30px;
+  padding: 20px;
   position: relative;
   border-radius: 0;
 }
@@ -2156,8 +2156,9 @@ table.dataTable.dtr-inline.collapsed
   position: relative;
 }
 .profile_info img {
-  max-width: 69px;
-  max-height: 69px;
+  max-width: 48px;
+  max-height: 48px;
+  margin-right: 20px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -2429,7 +2430,7 @@ table.dataTable {
 .table td,
 .table th {
   padding: 0.75rem;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 0 !important;
 }
 .sidebar {
@@ -2745,7 +2746,7 @@ table.dataTable {
   visibility: visible;
 }
 .sidebar #sidebar_menu li ul {
-  padding: 0 0 0 70px;
+  padding: 0 0 0 30px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .sidebar #sidebar_menu li ul {

@@ -13,6 +13,8 @@ public partial class dbContext : DbContext
 
     }
     public DbSet<Account> tblAccount { get; set; }
+    public DbSet<Category> tblCategory { get; set; }
+    public DbSet<Food> tblFood { get; set; }
 
 
 }

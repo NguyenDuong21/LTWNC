@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<Category>
+<div class="container-fluid p-0">
+    <div class="col-xl-12">
+                        <div class="white_box QA_section card_height_100">
+                            <div class="white_box_tittle list_header m-0 align-items-center">
+                                <div class="main-title mb-sm-15">
+                                    <h3 class="m-0 nowrap">Danh mục sản phẩm</h3>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">Thêm</button>
+                                </div>
+                            </div>
+                            <div>
+
+                                <table class="table lms_table_active2">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col" style="width: 30%;">Tên danh mục</th>
+                                            <th scope="col">Số lượng sản phẩm</th>
+                                            <th scope="col">Ngày thêm</th>
+                                            <th class="text-center" scope="col">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var categories in Model)
+                                        {
+                                        <tr id="tr@(categories.id)">
+                                            <td>1</td>
+                                            <th scope="row">
+                                                <div class="patient_thumb d-flex align-items-center">
+                                                    <div class="student_list_img mr_20">
+                                                        <img src="~/img/categories/@(categories.image)" alt="" srcset="">
+                                                    </div>
+                                                    <p>@categories.name</p>
+                                                </div>
+                                            </th>
+                                            <td>13</td>
+                                            <td>@categories.dateAdd</td>
+                                            <td class="text-center">
+                                                <a href="/category/@(categories.id)" target="_blank" class="btn btn-info"><i class="far fa-eye" style="color: white;"></i></a>
+                                                <button type="button" class="btn btn-success btn-edit-category" data-bs-toggle="modal" data-bs-target="#categoryModalEdit" data-id="@(categories.id)"><i class="fas fa-edit"></i></button>
+                                                <button type="button" class="btn btn-danger btn-delete-category" data-id="@(categories.id)"><i class="far fa-trash-alt"></i></button>
+                                            </td>
+                                        </tr>
+                                        } 
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>        
+</div>
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/handleSubmit" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Tên danh mục</label>
+                <input type="text" class="form-control" name="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Hình ảnh</label>
+                 <label class="picture" for="picture__input" tabIndex="0">
+                <span class="picture__image"></span>
+                </label>
+
+                <input type="file" name="ImageUpload" id="picture__input">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"   >Lưu</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="categoryModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa danh mục sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/handleEdit" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Tên danh mục</label>
+                <input type="text" class="form-control" id="nameEdit" name="name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Hình ảnh</label>
+                 <label class="picture" for="picture__inputEdit"  tabIndex="0">
+                <span class="picture__imageEdit" id="imgEdit"></span>
+                </label>
+
+                <input type="file" name="ImageUpload" id="picture__inputEdit">
+                <input type="hidden" name="id" id="categoryId" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" >Lưu</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+        const inputFileEdit = document.querySelector("#picture__inputEdit");
+        const pictureImageEdit = document.querySelector(".picture__imageEdit");
+        const pictureImageTxtEdit = "Chọn hình ảnh";
+        pictureImageEdit.innerHTML = pictureImageTxtEdit;
+
+        inputFileEdit.addEventListener("change", function (e) {
+        const inputTarget = e.target;
+        const file = inputTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function (e) {
+            const readerTarget = e.target;
+
+            const img = document.createElement("img");
+            img.src = readerTarget.result;
+            img.classList.add("picture__img");
+
+            pictureImageEdit.innerHTML = "";
+            pictureImageEdit.appendChild(img);
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            pictureImage.innerHTML = pictureImageTxtEdit;
+        }
+        });
+
+    const editBtns = document.querySelectorAll(".btn-edit-category");
+    editBtns.forEach(function(elem) {
+        elem.addEventListener("click", function(){
+        let id = elem.getAttribute("data-id");
+        document.getElementById("categoryId").value = id;
+        var request = new XMLHttpRequest();
+        request.open("GET", "/getCategory/"+id);
+
+        request.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                let data = JSON.parse(this.responseText);
+                document.getElementById("nameEdit").value = data.name;
+                const pictureImage = document.getElementById("imgEdit");
+                const img = document.createElement("img");
+                img.src = `/img/categories/${data.image}`;
+                img.classList.add("picture__img");
+                pictureImage.innerHTML = "";
+                pictureImage.appendChild(img);
+            }
+        };
+
+        // Gửi yêu cầu đến máy chủ
+        request.send();
+    });
+    });
+
+    const deleteBtns = document.querySelectorAll(".btn-delete-category");
+    deleteBtns.forEach(function(elem) {
+        elem.addEventListener("click", function(){
+        let id = elem.getAttribute("data-id");
+        let isDelete = confirm("Chỉ có thể xóa danh mục không có sản phẩm. Bạn có chắc chắn muốn xóa không ?");
+        if(isDelete) {
+            var request = new XMLHttpRequest();
+            var url = '/handleDelete';
+            console.log(url);
+            var params = "id="+id;
+            request.open('POST', url, true);
+
+            //Send the proper header information along with the request
+            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            request.onreadystatechange = function() {
+                if(this.readyState === 4 && this.status === 200) {
+                    if(this.responseText == "success") {
+                        document.getElementById(`tr${id}`).remove();
+                        window.alert("Xóa thành công");
+                    } else {
+                        window.alert("Có lỗi xảy ra. Xóa thất bại. Chỉ có thể xóa danh mục không có sản phẩm.");
+                    }
+                }
+            };
+
+            // Gửi yêu cầu đến máy chủ
+            request.send(params);
+        }
+    });
+    });
+    
+</script>

@@ -13,6 +13,11 @@
       <link rel="stylesheet" href="~/css/metisMenu.css">
       <link rel="stylesheet" href="~/css/style1.css" />
       <link rel="stylesheet" href="~/css/colors/default.css" id="colorSkinCSS">
+      <style>
+         input {
+            margin-bottom: 5px !important;
+         }
+      </style>
    </head>
    <body class="crm_body_bg">
       <div class="container-fluid p-0">
@@ -26,14 +31,14 @@
                               <h5 class="modal-title">Đăng nhập</h5>
                            </div>
                            <div class="modal-body">
-                              <form method="post" action="">
+                              <form method="post" action="" onsubmit="return isValidData()">
                                  <div class>
                                     <input type="text" class="form-control" name="Email" placeholder="Nhập tài khoản">
-                                    <small class="text-danger"></small>
+                                    <small class="text-danger" id="emailWarning"></small>
                                  </div>
                                  <div class>
                                     <input type="password" class="form-control" name="Password" placeholder="Mật khẩu">
-                                    <small class="text-danger"></small>
+                                    <small class="text-danger" id="passwordWarning"></small>
                                  </div>
                                  <div class>
                                     <p class="text-danger">@(ViewData["isLoginSuccess"] != null ? ViewData["isLoginSuccess"] : "")</p>
@@ -51,6 +56,28 @@
             </div>
          </div>
       </div>
-      <script src="~/js/site.js" asp-append-version="true"></script>
+      <script>
+         function isValidData() {
+            let isValidForm = true;
+            let inputName = document.getElementsByName("Email")[0];
+            let inputPass = document.getElementsByName("Password")[0];
+            if (inputName.value == "") {
+               document.getElementById("emailWarning").innerHTML = "Tài khoản không được để trống";
+               isValidForm = false;
+            } else {
+               document.getElementById("emailWarning").innerHTML = "";
+               isValidForm = true;
+            }
+
+            if (inputPass.value == "") {
+               document.getElementById("passwordWarning").innerHTML = "Mật khẩu không được để trống";
+               isValidForm = false;
+            } else {
+               document.getElementById("passwordWarning").innerHTML = "";
+               isValidForm = true;
+            }
+            return isValidForm;
+         }
+      </script>
    </body>
 </html>
