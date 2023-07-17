@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Cafe_Management_System.Models;
+using Cafe_Management_System.Interface;
+using Cafe_Management_System.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddDbContext<dbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
+    
+builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
 
 builder.Services.AddDistributedMemoryCache();
@@ -16,6 +21,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper> ();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

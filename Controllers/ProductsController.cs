@@ -2,17 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Cafe_Management_System.Models;
 using Microsoft.EntityFrameworkCore;
+using Cafe_Management_System.Interface;
+
 namespace Cafe_Management_System.Controllers;
 
 public class ProductsController : Controller
 {
     private readonly IWebHostEnvironment _hostEnvironment;
+    private IRepositoryWrapper _repository;
     private readonly ILogger<ProductsController> _logger;
 
     private readonly dbContext _context;
 
-    public ProductsController(ILogger<ProductsController> logger, dbContext context, IWebHostEnvironment hostEnvironment)
+    public ProductsController(ILogger<ProductsController> logger, dbContext context, IWebHostEnvironment hostEnvironment, IRepositoryWrapper repository)
     {
+        _repository = repository;
         _logger = logger;
         _context = context;
         this._hostEnvironment = hostEnvironment;
@@ -20,7 +24,7 @@ public class ProductsController : Controller
     [HttpGet("/product")]
     public async Task<IActionResult> Index()
     {
-        var product = await _context.tblFood.ToListAsync();
+        var product = _repository.Food.FindAll().ToList();
         ViewData["categories"] = await _context.tblCategory.ToListAsync();
         return View(product);
     }

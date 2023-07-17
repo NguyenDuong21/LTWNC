@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Cafe_Management_System.Models;
 using Microsoft.EntityFrameworkCore;
+using Cafe_Management_System.Interface;
+
 namespace Cafe_Management_System.Controllers;
 
 public class CategoryController : Controller
@@ -9,10 +11,13 @@ public class CategoryController : Controller
     private readonly IWebHostEnvironment _hostEnvironment;
     private readonly ILogger<CategoryController> _logger;
 
+    private IRepositoryWrapper _repository;
+
     private readonly dbContext _context;
 
-    public CategoryController(ILogger<CategoryController> logger, dbContext context, IWebHostEnvironment hostEnvironment)
+    public CategoryController(ILogger<CategoryController> logger, dbContext context, IWebHostEnvironment hostEnvironment, IRepositoryWrapper repository)
     {
+        _repository = repository;
         _logger = logger;
         _context = context;
         this._hostEnvironment = hostEnvironment;
@@ -20,7 +25,7 @@ public class CategoryController : Controller
     [HttpGet("/category")]
     public async Task<IActionResult> Index()
     {
-        var categories = await _context.tblCategory.ToListAsync();
+        var categories = _repository.Category.FindAll().ToList();
         return View(categories);
     }
 

@@ -8,18 +8,19 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using Cafe_Management_System.Interface;
+
 namespace Cafe_Management_System.Controllers;
 
 public class AdminController : Controller
 {
     private readonly ILogger<AdminController> _logger;
-    private readonly dbContext _context;
+    private IRepositoryWrapper _repository;
     private string email;
-    public AdminController(ILogger<AdminController> logger, dbContext context)
+    public AdminController(ILogger<AdminController> logger,  IRepositoryWrapper repository)
     {
+        _repository = repository;
         _logger = logger;
-        _context = context;
-        
     }
 
     public IActionResult Index()
@@ -31,6 +32,8 @@ public class AdminController : Controller
     [HttpGet("/login")]
     public async Task<IActionResult> Login()
     {
+        var account = _repository.Account.GetByEmail("admin");
+        Console.WriteLine(account.PassWord);
         email = HttpContext.Session.GetString("_Email");
         return email == null ? View() : RedirectToAction("Index");
     }
@@ -39,7 +42,7 @@ public class AdminController : Controller
     {
         string emailLogin = account.Email;
         ViewData["isLoginSuccess"] = "Tài khoản hoặc mật khẩu không chính xác";
-        Account loginAccount = await _context.tblAccount.FindAsync(emailLogin);
+        Account loginAccount = _repository.Account.GetByEmail(emailLogin);
         if(loginAccount != null) {
             string password = loginAccount.PassWord;
             if (password == Encrypt(account.PassWord)) {
