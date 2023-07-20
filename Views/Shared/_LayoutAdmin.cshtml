@@ -76,9 +76,15 @@
                 </a>
             </li>
             <li class>
-                <a class="has-arrow" href="/category" aria-expanded="false">
+                <a class="has-arrow" href="/product" aria-expanded="false">
                     <img src="~/img/menu-icon/7.svg" alt>
                     <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class>
+                <a class="has-arrow" asp-action="Index" asp-controller="Bill" aria-expanded="false">
+                    <img src="~/img/menu-icon/6.svg" alt>
+                    <span>Quản lý order</span>
                 </a>
             </li>
         </ul>
@@ -169,6 +175,8 @@
         });
 
     </script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/custom.min.js"></script>
+    <script src="~/js/admin.js"></script>
 </body>
 </html>

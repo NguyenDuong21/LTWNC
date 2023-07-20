@@ -5,6 +5,7 @@ namespace Cafe_Management_System.Repository;
 {
     private RepositoryContext _repoContext;
     private IFoodRepository _food;
+    private ITableFoodRepository _tablefood;
     private ICategoryRepository _category;
     private IAccountRepository _account;
 
@@ -25,6 +26,15 @@ namespace Cafe_Management_System.Repository;
                 _food = new FoodRepository(_repoContext);
             }
             return _food;
+        }
+    }
+     public ITableFoodRepository TableFood {
+        get {
+            if(_tablefood == null)
+            {
+                _tablefood = new TableFoodRepository(_repoContext);
+            }
+            return _tablefood;
         }
     }
     public IAccountRepository Account {
