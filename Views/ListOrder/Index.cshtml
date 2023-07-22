@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Admin Page";
+    //var categories = ViewData["categories"] as List<Category>;
+    var tablefoods = ViewData["tablefoods"] as List<TableFood>;
+    //var bills = ViewData["bills"] as List<Bill>;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<Bill>
+<div class="container-fluid p-0">
+    <div class="col-xl-12">
+        <div class="white_box QA_section card_height_100">
+            <div class="white_box_tittle list_header m-0 align-items-center">
+                <div class="main-title mb-sm-15">
+                    <h3 class="m-0 nowrap">Danh sách order</h3>
+                </div>
+            </div>
+            <div>
+                <table class="table lms_table_active2">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã bàn</th>
+                            <th scope="col">Tình trạng</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bill in Model)
+                        {
+                            <tr id="tr@(bill.id)">
+                                <td>@bill.id</td>
+                                <td>@bill.idTable</td>
+                                <td>@bill.status</td>
+                                <td>@bill.totalPrice</td>
+                                <td>
+                                    <a class="btn btn-info" style="color: white;" asp-action="Index" asp-controller="DetailOrder"
+                                        aria-expanded="false" asp-route-id="@bill.id">
+                                        <span>Xem</span>
+                                    </a>
+                                    <button class="btn btn-primary update_bill" data-id=@bill.id>Xác nhận</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Admin Page";
+    var categories = ViewData["categories"] as List<Category>;
+    var foods = ViewData["foods"] as List<Food>;
+    var bills = ViewData["bills"] as List<Bill>;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model BillInfo
+
+
+
+<div class="container-fluid p-0">
+    <div class="col-xl-12">
+        <div class="white_box QA_section card_height_100">
+            <div class="white_box_tittle list_header m-0 align-items-center">
+                <div class="main-title mb-sm-15">
+                    <h3 class="m-0 nowrap">Thông tin chi tiết của order</h3>
+                </div>
+            </div>
+            <div>
+                <table class="table lms_table_active2">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã bill</th>
+                            <th scope="col">Mã sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.id</td>
+                            <td>@Model.idBill</td>
+                            <td>@Model.idFood</td>
+                            <td>@Model.count</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

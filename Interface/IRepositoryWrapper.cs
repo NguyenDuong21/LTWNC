@@ -5,7 +5,7 @@ public interface IRepositoryWrapper
     ITableFoodRepository TableFood { get; }
     ICategoryRepository Category { get; }
     IAccountRepository Account { get; }
-    // IAccountRepository Bill { get; }
-    // IAccountRepository BillInfo { get; }
+    IBillRepository Bill { get; }
+    IBillInfoRepository BillInfo { get; }
     void Save();
 }

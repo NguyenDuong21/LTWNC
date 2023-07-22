@@ -62,5 +62,4 @@ public class BillController : Controller
         return View("~/Views/Bill/Success.cshtml");
 
     }
-
 }

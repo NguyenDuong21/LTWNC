@@ -18,5 +18,4 @@ public partial class dbContext : DbContext
     public DbSet<TableFood>? TableFoods { get; set; }
     public DbSet<Bill>? Bills { get; set; }
     public DbSet<BillInfo>? billInfos { get; set; }
-
 }
