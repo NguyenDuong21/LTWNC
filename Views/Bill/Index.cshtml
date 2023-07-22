@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "Admin Page";
+    var categories = ViewData["categories"] as List<Category>;
+    var tablefoods = ViewData["tablefoods"] as List<TableFood>;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<Food>
+<div class="container-fluid p-0">
+    <div class="col-xl-12">
+        <div class="white_box QA_section card_height_100">
+
+            <form method="post" asp-action="AddBill" asp-controller="Bill">
+
+                <div class="white_box_tittle list_header m-0 align-items-center">
+                    <div class="main-title mb-sm-15">
+                        <h3 class="m-0 nowrap">Order</h3>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">Save order</button>
+                    </div>
+                </div>
+                <div>
+
+                    <div class="mb-12">
+                        <label for="exampleInputEmail1" class="form-label">Lựa chọn bàn ăn</label>
+                        <select class="form-select" name="TableId" aria-label="Default select example">
+                            <option selected>Chọn bàn</option>
+                            @foreach (var tableFood in tablefoods)
+                            {
+                                <option value="@tableFood.id">@tableFood.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-12">
+                        <label for="exampleInputEmail1" class="form-label">Thanh toán</label>
+                        <select class="form-select" name="status" aria-label="Default select example">
+                            <option value="0">Khi đến cửa hàng</option>
+                            <option value="1">Ví điện tử</option>
+                        </select>
+                    </div>
+
+                    <table class="table lms_table_active2 bill-product">
+                        <thead>
+                            <tr>
+                                <th scope="col">Chọn</th>
+                                <th scope="col" style="width: 30%;">Tên sản phẩm</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                <tr id="tr@(product.id)">
+                                    <td><input type="checkbox" name="id[]" value="@(product.id)" /></td>
+                                    <th scope="row">
+                                        <div class="patient_thumb d-flex align-items-center">
+                                            <div class="student_list_img mr_20">
+                                                <img src="~/img/products/@(product.image)" alt="" srcset="">
+                                            </div>
+                                            <p>@product.name</p>
+                                        </div>
+                                    </th>
+                                    <td class="price">@product.price</td>
+                                    <td class="count"><input type="number" name="count[@product.id]" value="1" min="1" /></td> 
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td> <input type="hidden" name="totalPrice" value="" /></td>
+                                <td></td>
+                                <td></td>
+                                <td class="totalPrice">
+
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
