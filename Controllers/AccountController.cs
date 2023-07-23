@@ -30,22 +30,22 @@ public class AccountController : Controller
         var accounts = _repository.Account.FindAll().ToList();
         return View(accounts);
     }
-    // [HttpGet("/getAccount/{email?}/")]
-    // public async Task<IActionResult> getAccount(string Email)
-    // {   
-    //     var account = await _context.tblAccount.FindAsync(Email);
-    //     account.PassWord = Decrypt(account.PassWord);
-    //     Console.WriteLine(JsonSerializer.Serialize(account));
-    //     return Json(account);
-    // }
+    [HttpGet("/getAccount/{email?}/")]
+    public async Task<IActionResult> getAccount(string Email)
+    {
+        var account = await _context.tblAccount.FindAsync(Email);
+        account.PassWord = Decrypt(account.PassWord);
+        Console.WriteLine(JsonSerializer.Serialize(account));
+        return Json(account);
+    }
     [HttpPost("/createNewAccount")]
     public async Task<IActionResult> handleSubmit(Account account)
     {
-       if (ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             // Lưu tài khoản mới vào CSDL
-            account.Type=0;
-            account.PassWord= Encrypt(account.PassWord);
+            account.Type = 0;
+            account.PassWord = Encrypt(account.PassWord);
             _context.tblAccount.Add(account);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -54,7 +54,24 @@ public class AccountController : Controller
         // Nếu ModelState không hợp lệ, quay trở lại Modal với thông tin lỗi
         return PartialView("_CreatePartial", account);
     }
-     private string Encrypt(string clearText)
+    [HttpPost("/handleEditAccount")]
+    public async Task<IActionResult> handleEdit(Account account)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(account));
+        var existingAccount = await _context.tblAccount.FindAsync(account.Email);
+        if (!string.IsNullOrEmpty(account.Name))
+        {
+            existingAccount.Name = account.Name;
+        }
+        if (!string.IsNullOrEmpty(account.PassWord))
+        {
+            existingAccount.PassWord = Encrypt(account.PassWord);
+        }
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+    private string Encrypt(string clearText)
     {
         string encryptionKey = "MAKV2SPBNI99212";
         byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
@@ -73,10 +90,10 @@ public class AccountController : Controller
                 clearText = Convert.ToBase64String(ms.ToArray());
             }
         }
- 
+
         return clearText;
     }
- 
+
     private string Decrypt(string cipherText)
     {
         string encryptionKey = "MAKV2SPBNI99212";
@@ -96,7 +113,7 @@ public class AccountController : Controller
                 cipherText = Encoding.Unicode.GetString(ms.ToArray());
             }
         }
- 
+
         return cipherText;
     }
 
