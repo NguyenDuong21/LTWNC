@@ -13,6 +13,5 @@ public class Bill
 
     public int status { get; set; }
     
-    public float totalPrice { get; set; }
-
+    public double? totalPrice { get; set; }
 }
