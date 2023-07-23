@@ -1,49 +1,96 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Cafe_Management_System</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Cafe_Management_System.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/front-end/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/front-end/vendor.css" asp-append-version="true" />
 </head>
-<body>
+
+<body class=home-page>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cafe_Management_System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+	<div class=header-body>
+		<nav class="navbar navbar-default">
+			<div class=container-fluid>
+				<div class=row>
+					<div class=brand><a href=index.html><p>SINCE 1939</p>
+						<img alt="Brand Logo" class=logo src=~images/logo.png> </a></div>
+					<div class=navbar-header>
+						<button aria-expanded=false class="navbar-toggle collapsed" data-target=#coffeeNavbarPrimary data-toggle=collapse type=button>
+							<span class=sr-only>Toggle navigation</span> <span class=icon-bar></span>
+							<span class=icon-bar></span> <span class=icon-bar></span></button>
+					</div>
+					<a class=header-logo href=index.html>Coffee and You <img alt="" src=~images/small-logo.png> </a>
+					<div class="collapse navbar-collapse" id=coffeeNavbarPrimary>
+						<ul class="nav navbar-nav navbar-right">
+							<li class=active><a href=index.html>Home</a></li>
+							<li><a href=menu.html>Menu</a></li>
+							<li><a href=blog-list.html>blog</a></li>
+							<li><a>gallery</a>
+								<ul class=submenu>
+									<li><a href=#>Fluid</a>
+										<ul class=submenu>
+											<li><a href=masonry-layout.html>masonary</a></li>
+											<li><a href=galleryIsotope.html>isotope</a></li>
+										</ul>
+									</li>
+									<li><a href=#>Static</a>
+										<ul class=submenu>
+											<li><a href=gallery.html>3 column gallery page</a></li>
+											<li><a href=singlepage-gallery.html>single page gallery</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href=store.html>store</a></li>
+							<li><a href=contactus.html>Contact</a></li>
+							<li><a href=shopcart.html>Cart
+								<i class="fa fa-shopping-cart"><span class=cartitems>42</span></i></a></li>
+							<li class=button-order-now><a href=shopcart.html>Order Now</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Cafe_Management_System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer>
+        <div class=upper>
+            <div class=container>
+                <h2>Let's visit our</h2>
+                <h3>Shop Today</h3>
+                <div><img alt="" src=~images/logo.png></div>
+                <a class=order-btn href=store.html>Order your coffee now !</a>
+                <div class=footer-nav-wrapper>
+                    <ul class="footer-nav clearfix">
+                        <li><a href=index.html>Home</a></li>
+                        <li><a href=menu.html>Menu</a></li>
+                        <li><a href=gallery.html>Gallery</a></li>
+                        <li><a href=shopcart.html>Cart</a></li>
+                        <li><a href=contactus.html>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class=lower>
+            <div class=container><a class=back-to-top href=#><i class="fa fa-angle-up"></i></a>
+                <small>&copy; 2016 0efforttheme. Trademarks and brands are the property of their respective
+                    owners.</small>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/front-end/main.js"></script>
+<script src="~/js/front-end/modernizr.js"></script>
+<script src="~/js/front-end/plugins.js"></script>
+<script src="~/js/front-end/vendor.js"></script>
+
 </html>
