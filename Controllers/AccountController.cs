@@ -70,6 +70,24 @@ public class AccountController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
+     [HttpPost("/handleDeleteAccount")]
+    public async Task<IActionResult> handleDelete(string Email)
+    {   
+        try
+        {
+            var account = await _context.tblAccount.FindAsync(Email);
+            Console.WriteLine(JsonSerializer.Serialize(account));
+            _context.tblAccount.Remove(account);
+            await _context.SaveChangesAsync();
+            return Content("success");
+        }
+        catch (System.Exception)
+        {
+            return Content("error");
+            throw;
+        }
+        
+    }
 
     private string Encrypt(string clearText)
     {
