@@ -19,6 +19,6 @@ public class Account
     [Required]
     public string Name { get; set; }
 
-    public int Type { get; set; } = 0;
+    public int Type { get; set; }
 
 }

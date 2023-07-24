@@ -65,6 +65,7 @@ public class AccountController : Controller
         {
             existingAccount.Password = Encrypt(account.Password);
         }
+        existingAccount.Type = account.Type;
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }

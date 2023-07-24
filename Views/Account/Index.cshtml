@@ -144,9 +144,9 @@
                     console.log(data)
                     document.getElementById("nameEdit").value = data.name;
                     document.getElementById("emailEdit").value = data.email;
-                    if (data.type === 1) {
+                    if (data.type == 1) {
                         document.getElementById("typeEdit1").checked = true;
-                    } else if (data.type === 0) {
+                    } else if (data.type == 0) {
                         document.getElementById("typeEdit0").checked = true;
                     }
                 }
