@@ -32,8 +32,7 @@ public class AdminController : Controller
     [HttpGet("/login")]
     public async Task<IActionResult> Login()
     {
-        var account = _repository.Account.GetByEmail("admin");
-        Console.WriteLine(account.PassWord);
+        var account = _repository.Account.GetByEmail("admin@admin.com");
         email = HttpContext.Session.GetString("_Email");
         return email == null ? View() : RedirectToAction("Index");
     }
@@ -44,8 +43,8 @@ public class AdminController : Controller
         ViewData["isLoginSuccess"] = "Tài khoản hoặc mật khẩu không chính xác";
         Account loginAccount = _repository.Account.GetByEmail(emailLogin);
         if(loginAccount != null) {
-            string password = loginAccount.PassWord;
-            if (password == Encrypt(account.PassWord)) {
+            string password = loginAccount.Password;
+            if (password == Encrypt(account.Password)) {
                 HttpContext.Session.SetString("_Email", emailLogin);
                 return RedirectToRoute("AdminPage");
             }

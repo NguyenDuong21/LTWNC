@@ -30,12 +30,10 @@ public class AccountController : Controller
         var accounts = _repository.Account.FindAll().ToList();
         return View(accounts);
     }
-    [HttpGet("/getAccount/{email?}/")]
-    public async Task<IActionResult> getAccount(string Email)
+    [HttpGet("/getAccount/{id?}/")]
+    public async Task<IActionResult> getAccount(int Id)
     {
-        var account = await _context.tblAccount.FindAsync(Email);
-        account.PassWord = Decrypt(account.PassWord);
-        Console.WriteLine(JsonSerializer.Serialize(account));
+        var account = await _context.tblAccount.FindAsync(Id);
         return Json(account);
     }
     [HttpPost("/createNewAccount")]
@@ -45,7 +43,7 @@ public class AccountController : Controller
         {
             // Lưu tài khoản mới vào CSDL
             account.Type = 0;
-            account.PassWord = Encrypt(account.PassWord);
+            account.Password = Encrypt(account.Password);
             _context.tblAccount.Add(account);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -56,26 +54,27 @@ public class AccountController : Controller
     }
     [HttpPost("/handleEditAccount")]
     public async Task<IActionResult> handleEdit(Account account)
-    {
-        Console.WriteLine(JsonSerializer.Serialize(account));
-        var existingAccount = await _context.tblAccount.FindAsync(account.Email);
+    {   
+        var existingAccount =  await _context.tblAccount.FindAsync(account.Id);
+        Console.WriteLine(JsonSerializer.Serialize(existingAccount));
         if (!string.IsNullOrEmpty(account.Name))
         {
             existingAccount.Name = account.Name;
         }
-        if (!string.IsNullOrEmpty(account.PassWord))
+        if (!string.IsNullOrEmpty(account.Password))
         {
-            existingAccount.PassWord = Encrypt(account.PassWord);
+            existingAccount.Password = Encrypt(account.Password);
         }
+        existingAccount.Type = account.Type;
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
      [HttpPost("/handleDeleteAccount")]
-    public async Task<IActionResult> handleDelete(string Email)
+    public async Task<IActionResult> handleDelete(int id)
     {   
         try
         {
-            var account = await _context.tblAccount.FindAsync(Email);
+            var account = await _context.tblAccount.FindAsync(id);
             Console.WriteLine(JsonSerializer.Serialize(account));
             _context.tblAccount.Remove(account);
             await _context.SaveChangesAsync();

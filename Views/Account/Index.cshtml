@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th scope="col">STT</th>
-                            <th scope="col" style="width: 30%;">Username</th>
+                            <th scope="col" style="width: 30%;">Email</th>
                             <th scope="col">Name</th>
                             <th scope="col">Type</th>
                             <th class="text-center" scope="col">Hành động</th>
@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach (var accounts in Model)
                         {
-                            <tr id="tr@(accounts.Email)">
+                            <tr id="tr@(accounts.Id)">
                                 <td>@i</td>
                                 <th scope="row">
                                     @accounts.Email
@@ -39,10 +39,10 @@
                                 <td>@accounts.Type</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-success btn-edit-account" data-bs-toggle="modal"
-                                        data-bs-target="#editAccountModal" data-id="@(accounts.Email)">
+                                        data-bs-target="#editAccountModal" data-id="@(accounts.Id)">
                                         <i class="fas fa-edit"></i></button>
                                     <button type="button" class="btn btn-danger btn-delete-account"
-                                        data-id="@(accounts.Email)">
+                                        data-id="@(accounts.Id)">
                                         <i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
@@ -66,7 +66,7 @@
                 <form method="post" action="/createNewAccount" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="email" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="Email" aria-describedby="emailHelp" required>
+                        <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -96,8 +96,7 @@
             <div class="modal-body">
                 <form method="post" action="/handleEditAccount" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" id="emailEdit" name="Email"
-                            aria-describedby="emailHelp">
+                        <input type="hidden" class="form-control" id="idAccountEdit" name="Id" value="">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" value="" id="nameEdit" name="Name"
                             aria-describedby="emailHelp">
@@ -135,19 +134,19 @@
     const editBtns = document.querySelectorAll(".btn-edit-account");
     editBtns.forEach(function (elem) {
         elem.addEventListener("click", function () {
-            let email = elem.getAttribute("data-id");
-            document.getElementById("emailEdit").value = email;
+            let id = elem.getAttribute("data-id");
             var request = new XMLHttpRequest();
-            request.open("GET", "/getAccount/" + email);
+            document.getElementById("idAccountEdit").value = id;
+            request.open("GET", "/getAccount/" + id);
             request.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     let data = JSON.parse(this.responseText);
                     console.log(data)
                     document.getElementById("nameEdit").value = data.name;
-                    document.getElementById("nameEdit").value = data.name;
-                    if (data.type === 1) {
+                    document.getElementById("emailEdit").value = data.email;
+                    if (data.type == 1) {
                         document.getElementById("typeEdit1").checked = true;
-                    } else if (data.type === 0) {
+                    } else if (data.type == 0) {
                         document.getElementById("typeEdit0").checked = true;
                     }
                 }
@@ -159,12 +158,12 @@
     const deleteBtns = document.querySelectorAll(".btn-delete-account");
     deleteBtns.forEach(function (elem) {
         elem.addEventListener("click", function () {
-            let email = elem.getAttribute("data-id");
+            let id = elem.getAttribute("data-id");
             let isDelete = confirm("Bạn có chắc chắn muốn xóa không ?");
             if (isDelete) {
                 var request = new XMLHttpRequest();
                 var url = '/handleDeleteAccount';
-                var params = "email=" + email;
+                var params = "id=" + id;
                 request.open('POST', url, true);
 
                 //Send the proper header information along with the request
