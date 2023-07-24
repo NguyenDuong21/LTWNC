@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach (var accounts in Model)
                         {
-                            <tr>
+                            <tr id="tr@(accounts.Email)">
                                 <td>@i</td>
                                 <th scope="row">
                                     @accounts.Email
@@ -96,13 +96,16 @@
             <div class="modal-body">
                 <form method="post" action="/handleEditAccount" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" id="emailEdit" name="Email" aria-describedby="emailHelp">
+                        <input type="hidden" class="form-control" id="emailEdit" name="Email"
+                            aria-describedby="emailHelp">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" value="" id="nameEdit" name="Name" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" value="" id="nameEdit" name="Name"
+                            aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="passwordEdit" name="Password" aria-describedby="emailHelp">
+                        <input type="password" class="form-control" id="passwordEdit" name="Password"
+                            aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
@@ -153,6 +156,34 @@
             request.send();
         });
     });
+    const deleteBtns = document.querySelectorAll(".btn-delete-account");
+    deleteBtns.forEach(function (elem) {
+        elem.addEventListener("click", function () {
+            let email = elem.getAttribute("data-id");
+            let isDelete = confirm("Bạn có chắc chắn muốn xóa không ?");
+            if (isDelete) {
+                var request = new XMLHttpRequest();
+                var url = '/handleDeleteAccount';
+                var params = "email=" + email;
+                request.open('POST', url, true);
 
+                //Send the proper header information along with the request
+                request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+                request.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        if (this.responseText == "success") {
+                            window.location.reload()
+                        } else {
+                            window.alert("Có lỗi xảy ra. Xóa thất bại!");
+                        }
+                    }
+                };
+
+                // Gửi yêu cầu đến máy chủ
+                request.send(params);
+            }
+        });
+    });
 
 </script>
